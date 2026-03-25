@@ -8,27 +8,31 @@
 #include "stack.h"
 
 int main() {
-    string_view c = sv("           Hello, World          ");
+    string_view c = sv("an empty stack just 4 u \n");
     sv_trim(&c); // chop off spaces
-    string_view hello = sv_chop_by_delim(&c, ','); // split hello and _world
     printf("|%.*s| \n", c.size, c.data);
-    printf("|%.*s| \n", hello.size, hello.data);
-
-    // stack tests
+   
     f_stack s = create_f_stack();
-    const uint16_t size = 10;
 
-    for (int i = 0; i < size; i++) {
-        push_f(&s, (float)i);
+    for (int i = 0; i < 10; i++) {
+        char input[1024];
+        printf("> ");
+        fgets(input, sizeof(input), stdin);
+
+        string_view sv_input = sv(input);
+        while (sv_input.size > 0) {
+            sv_trim(&sv_input);
+            string_view first_string = sv_chop_by_delim(&sv_input, ' ');
+            if (*first_string.data == 'q') {
+                return 0;
+            } else {
+                // convert to float and push to stack
+                push_f(&s, strtof(first_string.data, NULL));
+            }
+        }
+        print_f_stack(&s);
     }
-
-    printf("the length is: %u \n", s.length);
-
-    for (int i = 0; i < size; i++) {
-        printf("%u \n", s.length);
-        // pop_f(&s);
-        printf("%f \n", pop_f(&s));
-    }
-
+    
     clear_f_stack(&s);
+    return 0;
 }
