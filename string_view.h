@@ -60,3 +60,15 @@ string_view sv_chop_by_delim(string_view* sv, char delim) {
     sv_chop_left(sv, sv->size);
     return result;
 }
+
+bool sv_compare(string_view* input, string_view* compare) {
+    if (input == NULL || compare == NULL) return false;
+    bool flag = true;
+    if (input->size != compare->size) return false;
+    for (int i = 0; i < input->size; i++) {
+        if (input->data[i] != compare->data[i]) {
+            flag = false;
+        } 
+    }
+    return flag;
+}

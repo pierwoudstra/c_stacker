@@ -3,6 +3,7 @@
 #include <stdint.h>
 #include <string.h>
 #include <ctype.h>
+#include <stdbool.h>
 
 #include "string_view.h"
 #include "stack.h"
@@ -27,7 +28,7 @@ int main() {
         while (sv_input.size > 0) {
             sv_trim(&sv_input);
             string_view first_string = sv_chop_by_delim(&sv_input, ' ');
-            if (*first_string.data == *quit.data && first_string.size == quit.size) {
+            if (sv_compare(&first_string, &quit)) {
                 return 0;
             } else {
                 interpret_cmd(&s, first_string);
