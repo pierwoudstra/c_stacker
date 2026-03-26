@@ -1,5 +1,3 @@
-// TODO implement different types of nodes (char and string?) (stack can stay the same (only change the name) )
-
 typedef struct f_node {
     float value;
     struct f_node* next_node;
@@ -70,9 +68,9 @@ float view_top_f(f_stack* stack_ptr) {
 }
 
 void print_f_stack(f_stack* stack_ptr) {
-    printf("{ ");
+    printf("| ");
     for (int i = (stack_ptr->length-1); i >= 0; i--) {
         printf("%.2f ", view_index_f_stack(stack_ptr, i));
     }
-    printf("}< top \n");
+    printf("|< top \n");
 }

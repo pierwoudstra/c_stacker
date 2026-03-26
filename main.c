@@ -6,13 +6,15 @@
 
 #include "string_view.h"
 #include "stack.h"
+#include "sound.h"
+#include "interpreter.h"
 
 int main() {
-    string_view c = sv("an empty stack just 4 u \n");
-    sv_trim(&c); // chop off spaces
-    printf("|%.*s| \n", c.size, c.data);
+    string_view message = sv("an empty stack just 4 u");
+    printf("|%.*s| \n", message.size, message.data);
    
     f_stack s = create_f_stack();
+    audio_data* a = init_audio();
 
     for (int i = 0; i < 10; i++) {
         char input[1024];
@@ -26,13 +28,14 @@ int main() {
             if (*first_string.data == 'q') {
                 return 0;
             } else {
-                // convert to float and push to stack
-                push_f(&s, strtof(first_string.data, NULL));
+                interpret_cmd(&s, first_string);
             }
         }
         print_f_stack(&s);
+        play_f_stack(a, &s);
     }
     
+    uninit_audio(a);
     clear_f_stack(&s);
     return 0;
 }
