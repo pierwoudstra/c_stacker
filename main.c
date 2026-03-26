@@ -15,6 +15,8 @@ int main() {
    
     f_stack s = create_f_stack();
     audio_data* a = init_audio();
+    
+    string_view quit = sv("q");
 
     for (int i = 0; i < 10; i++) {
         char input[1024];
@@ -25,7 +27,7 @@ int main() {
         while (sv_input.size > 0) {
             sv_trim(&sv_input);
             string_view first_string = sv_chop_by_delim(&sv_input, ' ');
-            if (*first_string.data == 'q') {
+            if (*first_string.data == *quit.data && first_string.size == quit.size) {
                 return 0;
             } else {
                 interpret_cmd(&s, first_string);
