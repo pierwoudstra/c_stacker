@@ -20,6 +20,10 @@ int main() {
     string_view quit = sv("q");
 
     for (int i = 0; i < 10; i++) {
+        printf("\e[1;1H\e[2J"); // flush
+        print_f_stack(&s);
+        play_f_stack(a, &s);
+
         char input[1024];
         printf("> ");
         fgets(input, sizeof(input), stdin);
@@ -34,8 +38,7 @@ int main() {
                 interpret_cmd(&s, first_string);
             }
         }
-        print_f_stack(&s);
-        play_f_stack(a, &s);
+        
     }
     
     uninit_audio(a);

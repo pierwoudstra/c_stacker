@@ -69,8 +69,13 @@ float view_top_f(f_stack* stack_ptr) {
 
 void print_f_stack(f_stack* stack_ptr) {
     printf("| ");
-    for (int i = (stack_ptr->length-1); i >= 0; i--) {
-        printf("%.2f ", view_index_f_stack(stack_ptr, i));
+    if (stack_ptr->length == 0) {
+        printf("an empty stack just 4 u |\n");
+    } else {
+        for (int i = (stack_ptr->length-1); i >= 0; i--) {
+            printf("%.2f ", view_index_f_stack(stack_ptr, i));
+        }
+        printf("|< top \n");
     }
-    printf("|< top \n");
+    
 }
