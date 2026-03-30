@@ -32,7 +32,7 @@ int main() {
         while (sv_input.size > 0) {
             sv_trim(&sv_input);
             string_view first_string = sv_chop_by_delim(&sv_input, ' ');
-            if (sv_compare(&first_string, &quit)) {
+            if (sv_compare(first_string, sv("q"))) {
                 return 0;
             } else {
                 interpret_cmd(&s, first_string);
