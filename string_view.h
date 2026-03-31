@@ -62,7 +62,7 @@ string_view sv_chop_by_delim(string_view* sv, char delim) {
 }
 
 bool sv_compare(string_view input, string_view compare) {
-    if (&input == NULL || &compare == NULL) return false;
+    if (input.data == NULL || compare.data == NULL) return false;
     bool flag = true;
     if (input.size != compare.size) return false;
     for (int i = 0; i < input.size; i++) {
