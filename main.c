@@ -17,8 +17,6 @@ int main() {
     f_stack s = create_f_stack();
     audio_data* a = init_audio();
     
-    string_view quit = sv("q");
-
     for (int i = 0; i < 10; i++) {
         printf("\e[1;1H\e[2J"); // flush
         print_f_stack(&s);
