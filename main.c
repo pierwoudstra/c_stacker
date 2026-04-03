@@ -20,8 +20,7 @@ int main() {
     for (int i = 0; i < 10; i++) {
         printf("\e[1;1H\e[2J"); // flush
         print_f_stack(&s);
-        play_f_stack(a, &s);
-
+        
         char input[1024];
         printf("> ");
         fgets(input, sizeof(input), stdin);
@@ -32,6 +31,11 @@ int main() {
             string_view first_string = sv_chop_by_delim(&sv_input, ' ');
             if (sv_compare(first_string, sv("q")) || sv_compare(first_string, sv("quit")) ) {
                 return 0;
+            } else if (sv_compare(first_string, sv("."))) {
+                printf("\e[1;1H\e[2J"); // flush
+                print_f_stack(&s);
+                printf("\n playing ...");
+                play_f_stack(a, &s);
             } else {
                 interpret_cmd(&s, first_string);
             }

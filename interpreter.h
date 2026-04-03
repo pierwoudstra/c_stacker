@@ -62,8 +62,6 @@ void interpret_cmd(f_stack* s, string_view cmd) {
             push_f(s, n1);
             push_f(s, n3);
         }
-
-
     } else {
         // convert to float and push to stack
         push_f(s, strtof(cmd.data, NULL));

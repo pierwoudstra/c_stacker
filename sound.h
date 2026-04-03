@@ -1,6 +1,7 @@
 // #include "miniaudio/miniaudio.h"
 
 #include "miniaudio/miniaudio.c"
+#include <math.h>
 
 #ifdef _WIN32
 #include <windows.h>
@@ -43,9 +44,15 @@ void uninit_audio(audio_data* data) {
     free(data);
 }
 
+float midi_to_playback_speed(float midi) {
+
+    // 0 = 1 .. 12 = 2 // 24 = 4 enz
+    return pow(2.0, (midi/12.f));
+}
+
 void play_f_stack(audio_data* data, f_stack* s) {
     for (int i = (s->length-1); i >= 0; i--) {
-        ma_sound_set_pitch(&data->sound, view_index_f_stack(s, i));
+        ma_sound_set_pitch(&data->sound, midi_to_playback_speed(view_index_f_stack(s, i)));
         ma_sound_seek_to_pcm_frame(&data->sound, 0);
         ma_sound_start(&data->sound);
 
