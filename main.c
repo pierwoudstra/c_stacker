@@ -17,7 +17,7 @@ int main() {
     f_stack s = create_f_stack();
     audio_data* a = init_audio();
     
-    for (int i = 0; i < 10; i++) {
+    while(true) {
         printf("\e[1;1H\e[2J"); // flush
         print_f_stack(&s);
         
